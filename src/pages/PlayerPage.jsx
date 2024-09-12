@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Typography, Button, Grid, Paper, CircularProgress, Alert, Box } from '@mui/material';
 import PlayerInfoTable from '../components/PlayerInfoTable';
-import PlayerInfoButton from '../components/PlayerInfoButton';
 import PlayerStatChart from '../components/PlayStatChart';
 
 function PlayerPage() {
