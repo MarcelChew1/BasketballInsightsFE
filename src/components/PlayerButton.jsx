@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 function PlayerButton({id, name, index}) {
   const navigate = useNavigate(); 
   const handleOnClick = () => {
-    console.log(name);
-    console.log(id)
     navigate(`/player/${id}`);
   }
   return (

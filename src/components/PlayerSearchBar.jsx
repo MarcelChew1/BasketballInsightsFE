@@ -9,10 +9,9 @@ function PlayerSearchBar() {
     setQuery(e.target.value);
     if (e.target.value.length > 1) {
       try {
-        const response = await axios.get(`https://basketballinsightsbe-ccec99c2ec8f.herokuapp.com/search`, {
+        const response = await axios.get(`https://basketballinsightsbe-ccec99c2ec8f.herokuapp.com//search`, {
           params: { q: e.target.value }
         });
-        console.log(response.data)
         setSuggestions(response.data); // Assuming response.data is an array of suggestions
       } catch (error) {
         console.error('Failed to fetch suggestions:', error);

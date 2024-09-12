@@ -32,7 +32,6 @@ function PlayerPage() {
   const getPlayerInfo = async (field) => {
     try {
       const response = await axios.get(`https://basketballinsightsbe-ccec99c2ec8f.herokuapp.com/player/${playerId}/${field}`);
-      console.log(response.data);
       setPlayerTable(response.data);
       setTableType(field);
     } catch (err) {
