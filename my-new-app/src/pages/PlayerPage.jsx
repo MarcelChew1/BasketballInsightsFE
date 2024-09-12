@@ -18,7 +18,7 @@ function PlayerPage() {
     const fetchPlayerData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:5000/player/${playerId}`);
+        const response = await axios.get(`https://basketballinsightsbe-ccec99c2ec8f.herokuapp.com/player/${playerId}`);
         setPlayerData(response.data);
         setLoading(false);
       } catch (err) {
@@ -32,7 +32,7 @@ function PlayerPage() {
 
   const getPlayerInfo = async (field) => {
     try {
-      const response = await axios.get(`http://localhost:5000/player/${playerId}/${field}`);
+      const response = await axios.get(`https://basketballinsightsbe-ccec99c2ec8f.herokuapp.com/player/${playerId}/${field}`);
       console.log(response.data);
       setPlayerTable(response.data);
       setTableType(field);
