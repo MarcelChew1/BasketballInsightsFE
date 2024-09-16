@@ -165,7 +165,7 @@ const statColors = {
     'PF': '#8C33FF',
     'PTS': '#33FF8C',
   },
-  'Per Possesion': {
+  'Per Possession': {
     'G': '#FF5733',
     'GS': '#33FF57',
     'MP': '#3357FF',

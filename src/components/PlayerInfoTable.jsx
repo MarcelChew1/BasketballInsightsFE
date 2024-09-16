@@ -38,9 +38,11 @@ const PlayerInfoTable = ({ table, type }) => {
 
   // Helper function to get the label of the column from statOptions
   const getColumnLabel = (column) => {
+    console.log(type)
     const statOption = statOptions[type].find(option => option.value === column);
     if (column.includes("Unnamed:")) return "";
     if (column.includes("Game Highs")) column = column.replace(new RegExp("Game Highs ", 'g'), '');
+    console.log(statOption)
     return statOption ? statOption.label : column; // Return label if found, otherwise return the key
   };
 

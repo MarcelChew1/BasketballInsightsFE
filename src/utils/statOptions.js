@@ -161,7 +161,7 @@ const statOptions = {
     { "value": "PF", "label": "PF" },
     { "value": "PTS", "label": "PTS" }
   ],
-  'Per Possesion': [
+  'Per Possession': [
     { "value": "G", "label": "Gms" },
     { "value": "GS", "label": "GS" },
     { "value": "MP", "label": "MP" },
