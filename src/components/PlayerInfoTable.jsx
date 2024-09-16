@@ -5,7 +5,14 @@ import statOptions from '../utils/statOptions'; // Import statOptions
 
 const PlayerInfoTable = ({ table, type }) => {
   const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('Season');
+  let initialOrderBy = 'Season';
+  if (type === 'Highs') {
+    initialOrderBy = 'Game Highs: Season';
+  }
+  if (type === 'Playoffs') {
+    initialOrderBy = 'Year';
+  }
+  const [orderBy, setOrderBy] = React.useState(initialOrderBy);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
