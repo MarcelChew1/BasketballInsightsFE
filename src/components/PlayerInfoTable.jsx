@@ -5,16 +5,20 @@ import statOptions from '../utils/statOptions'; // Import statOptions
 
 const PlayerInfoTable = ({ table, type }) => {
   const [order, setOrder] = React.useState('desc');
-  let initialOrderBy = 'Season';
-  if (type === 'Highs') {
-    initialOrderBy = 'Game Highs Season';
-  }
-  if (type === 'Playoffs') {
-    initialOrderBy = 'Year';
-  }
-  const [orderBy, setOrderBy] = React.useState(initialOrderBy);
+  const [orderBy, setOrderBy] = React.useState('Season'); // Initial value can be 'Season'
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  // useEffect to update orderBy when 'type' changes
+  React.useEffect(() => {
+    let initialOrderBy = 'Season';
+    if (type === 'Highs') {
+      initialOrderBy = 'Game Highs Season';
+    } else if (type === 'Playoffs') {
+      initialOrderBy = 'Year';
+    }
+    setOrderBy(initialOrderBy); // Update the orderBy state when type changes
+  }, [type]);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -45,11 +49,9 @@ const PlayerInfoTable = ({ table, type }) => {
 
   // Helper function to get the label of the column from statOptions
   const getColumnLabel = (column) => {
-    console.log(type)
     const statOption = statOptions[type].find(option => option.value === column);
     if (column.includes("Unnamed:")) return "";
     if (column.includes("Game Highs")) column = column.replace(new RegExp("Game Highs ", 'g'), '');
-    console.log(statOption)
     return statOption ? statOption.label : column; // Return label if found, otherwise return the key
   };
 
