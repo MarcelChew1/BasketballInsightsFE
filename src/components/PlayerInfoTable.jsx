@@ -1,9 +1,10 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel, TablePagination, Typography } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
+import statOptions from '../utils/statOptions'; // Import statOptions
 
-const PlayerInfoTable = ({ table }) => {
-  const [order, setOrder] = React.useState('asc');
+const PlayerInfoTable = ({ table, type }) => {
+  const [order, setOrder] = React.useState('desc');
   const [orderBy, setOrderBy] = React.useState('Season');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -35,6 +36,14 @@ const PlayerInfoTable = ({ table }) => {
     });
   }, [order, orderBy, table]);
 
+  // Helper function to get the label of the column from statOptions
+  const getColumnLabel = (column) => {
+    const statOption = statOptions[type].find(option => option.value === column);
+    if (column.includes("Unnamed:")) return "";
+    if (column.includes("Game Highs")) column = column.replace(new RegExp("Game Highs ", 'g'), '');
+    return statOption ? statOption.label : column; // Return label if found, otherwise return the key
+  };
+
   return (
     <TableContainer component={Paper}>
       <Typography variant="h6" component="div" sx={{ p: 2 }}>
@@ -46,14 +55,16 @@ const PlayerInfoTable = ({ table }) => {
             {Object.keys(table[0] || {}).map((column) => (
               <TableCell
                 key={column}
-                sx={{ padding: '4px 8px' }} // Adjust padding to reduce space between columns
+                sx={{ padding: '4px 8px',
+                      textAlign: 'center',
+                 }} 
               >
                 <TableSortLabel
                   active={orderBy === column}
                   direction={orderBy === column ? order : 'asc'}
                   onClick={() => handleRequestSort(column)}
                 >
-                  {column}
+                  {getColumnLabel(column)} {/* Display the stat label */}
                   {orderBy === column ? (
                     <span style={visuallyHidden}>
                       {order === 'desc' ? 'sorted descending' : 'sorted ascending'}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Typography, Button, Grid, Paper, CircularProgress, Alert, Box } from '@mui/material';
 import PlayerInfoTable from '../components/PlayerInfoTable';
@@ -7,6 +7,7 @@ import PlayerStatChart from '../components/PlayStatChart';
 
 function PlayerPage() {
   const { playerId } = useParams(); // Get playerId from the URL
+  const navigate = useNavigate(); // Initialize useNavigate hook
   const [playerData, setPlayerData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,6 +21,9 @@ function PlayerPage() {
         const response = await axios.get(`https://basketballinsightsbe-ccec99c2ec8f.herokuapp.com/player/${playerId}`);
         setPlayerData(response.data);
         setLoading(false);
+        const totalsResponse = await axios.get(`https://basketballinsightsbe-ccec99c2ec8f.herokuapp.com/player/${playerId}/Totals`);
+        setPlayerTable(totalsResponse.data);
+        setTableType('Totals');
       } catch (err) {
         setError(err);
         setLoading(false);
@@ -39,6 +43,10 @@ function PlayerPage() {
     }
   };
 
+  const handleBackToHome = () => {
+    navigate('/'); // Navigate to the home page
+  };
+
   if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}><CircularProgress /></Box>;
   if (error) return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}><Alert severity="error">Error: {error.message}</Alert></Box>;
 
@@ -46,6 +54,15 @@ function PlayerPage() {
     <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', p: 3 }}>
       <Container maxWidth="xl">
         <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
+          <Box sx={{ mb: 2 }}>
+            <Button
+              variant="outlined"
+              onClick={handleBackToHome}
+              sx={{ mb: 2 }}
+            >
+              Back to Home
+            </Button>
+          </Box>
           <Typography variant="h4" gutterBottom align="center">
             Player: {playerData.Name}
           </Typography>
@@ -76,7 +93,7 @@ function PlayerPage() {
         {playerTable && (
           <Box mb={4}>
             <Paper elevation={3} sx={{ p: 3 }}>
-              <PlayerInfoTable table={playerTable} />
+              <PlayerInfoTable table={playerTable} type={tableType} />
             </Paper>
           </Box>
         )}

@@ -1,29 +1,35 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 
-function PlayerButton({id, name, index}) {
-  const navigate = useNavigate(); 
+function PlayerButton({ id, name }) {
+  const navigate = useNavigate();
+
   const handleOnClick = () => {
     navigate(`/player/${id}`);
-  }
+  };
+
   return (
-    <button
-      key={index}
-      onClick={() => handleOnClick(name)}
-      style={{
-        display: 'block',
-        width: '100%',
+    <Button
+      variant="outlined"
+      fullWidth
+      onClick={handleOnClick}
+      sx={{
         textAlign: 'left',
         padding: '10px',
         margin: '2px 0',
-        border: '1px solid #ccc',
         borderRadius: '4px',
-        cursor: 'pointer'
+        justifyContent: 'flex-start',
+        textTransform: 'none', // Prevents uppercase transformation
+        color: 'black', // Sets the text color to black
+        borderColor: 'white', // Optionally set border color to black if using outlined variant
+        '&:hover': {
+          borderColor: 'black', // Maintains border color on hover
+        },
       }}
     >
       {name}
-    </button>
-
+    </Button>
   );
 }
 

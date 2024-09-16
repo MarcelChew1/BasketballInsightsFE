@@ -1,22 +1,27 @@
-// Home page is just going to hold a search bar component
-
 import React from 'react';
+import { Container, Typography, Box } from '@mui/material';
 import PlayerSearchBar from '../components/PlayerSearchBar';
 
-const section = {
-  display: 'grid',
-  placeItems: 'center',
-  alignContent: 'center',
-  padding: '25px 0',
-  height: '50vh'
-}
-
 const Home = () => {
-  
   return (
-    <div style={section}>
-      <PlayerSearchBar/>
-    </div>
+    <Container
+      maxWidth="md"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        textAlign: 'center'
+      }}
+    >
+      <Typography variant="h4" gutterBottom>
+        Search for an NBA player
+      </Typography>
+      <Box sx={{ width: '100%', maxWidth: 600, mt: 2 }}>
+        <PlayerSearchBar />
+      </Box>
+    </Container>
   );
 };
 
