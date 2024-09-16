@@ -7,7 +7,7 @@ const PlayerInfoTable = ({ table, type }) => {
   const [order, setOrder] = React.useState('desc');
   let initialOrderBy = 'Season';
   if (type === 'Highs') {
-    initialOrderBy = 'Game Highs: Season';
+    initialOrderBy = 'Game Highs Season';
   }
   if (type === 'Playoffs') {
     initialOrderBy = 'Year';
